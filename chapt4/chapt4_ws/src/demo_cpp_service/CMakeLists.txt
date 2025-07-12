@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(status_display)
+project(demo_cpp_service)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,21 +7,27 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(chapt4_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(status_interfaces REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(turtlesim REQUIRED)
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+add_executable(turtle_control  src/turtle_control.cpp)
+ament_target_dependencies(turtle_control rclcpp geometry_msgs turtlesim chapt4_interfaces)
 
-add_executable(hello_qt src/hello_qt.cpp)
-target_link_libraries(hello_qt Qt5::Widgets)
-
-add_executable(sys_status_display src/sys_status_display.cpp)
-target_link_libraries(sys_status_display Qt5::Widgets) # 对于非ROS功能包使用Cmake原生指令进行链接库
-ament_target_dependencies(sys_status_display rclcpp status_interfaces)# ROS功能包使用ament_target_dependencies进行链接库
+add_executable(patrol_client  src/patrol_client.cpp)
+ament_target_dependencies(patrol_client rclcpp geometry_msgs turtlesim chapt4_interfaces)
 
 
-install(TARGETS hello_qt sys_status_display
-  DESTINATION lib/${PROJECT_NAME})
+install(TARGETS
+  turtle_control
+  patrol_client
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
 
 
 if(BUILD_TESTING)

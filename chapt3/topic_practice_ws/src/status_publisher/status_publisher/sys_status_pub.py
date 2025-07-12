@@ -26,7 +26,7 @@ class SysStatusPub(Node):
         msg.net_sent = net_io_counters.bytes_sent / 1024 / 1024
         msg.net_recv = net_io_counters.bytes_recv / 1024 / 1024
 
-        self.get_logger().info(f'发布:{str(msg)}')
+        self.get_logger().warn(f'发布:{str(msg)}')
         self.status_publisher_.publish(msg)
 
 
