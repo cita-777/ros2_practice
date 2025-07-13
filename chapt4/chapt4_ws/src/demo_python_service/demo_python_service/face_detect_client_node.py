@@ -1,6 +1,8 @@
 import rclpy
 from rclpy.node import Node
+# 自定义的服务消息接口
 from chapt4_interfaces.srv import FaceDetector
+# 让 cv_bridge 能正常生成 ROS 图像消息
 from sensor_msgs.msg import Image
 from ament_index_python.packages import get_package_share_directory
 import cv2
@@ -19,21 +21,25 @@ class FaceDetectorClient(Node):
         self.image = cv2.imread(self.test1_image_path)
 
     def send_request(self):
-        # 1.判断服务是否上线
+        # 1.阻塞1s判断服务是否上线
         while self.client.wait_for_service(timeout_sec=1.0) is False:
-            self.get_logger().info(f'等待服务端上线....')
+            self.get_logger().warn(f'等待服务端上线....')
         # 2.构造 Request
         request = FaceDetector.Request()
         request.image = self.bridge.cv2_to_imgmsg(self.image)
         # 3.发送并 spin 等待服务处理完成
+        # 异步调用服务，可以用future获取结果和检测进度
         future = self.client.call_async(request)
         rclpy.spin_until_future_complete(self, future)
         # 4.根据处理结果
         response = future.result()
-        self.get_logger().info(
+        self.get_logger().warn(
             f'接收到响应: 图像中共有：{response.number}张脸，耗时{response.use_time}')
-        # 注释show_face_locations，防止显示堵塞无法多次请求
-        # self.show_face_locations(response)
+        # 阻塞显示检测结果
+        if response.number == 0:
+            self.get_logger().warn('没有检测到人脸')
+        else:
+            self.show_face_locations(response)
 
     def call_set_parameters(self, parameters):
         # 1. 创建一个客户端，并等待服务上线
@@ -70,6 +76,7 @@ class FaceDetectorClient(Node):
 
     def show_face_locations(self, response):
         for i in range(response.number):
+            # 根据返回的位置信息在客户端本地的图像上画框
             top = response.top[i]
             right = response.right[i]
             bottom = response.bottom[i]

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(demo_cpp_service)
+project(demo_cpp_tf)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,27 +7,21 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(chapt4_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
 find_package(geometry_msgs REQUIRED)
-find_package(turtlesim REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
-add_executable(turtle_control  src/turtle_control.cpp)
-ament_target_dependencies(turtle_control rclcpp geometry_msgs turtlesim chapt4_interfaces)
+add_executable(static_tf_broadcaster src/static_tf_broadcaster.cpp)
+ament_target_dependencies(static_tf_broadcaster rclcpp tf2 tf2_ros geometry_msgs tf2_geometry_msgs)
 
-add_executable(patrol_client  src/patrol_client.cpp)
-ament_target_dependencies(patrol_client rclcpp geometry_msgs turtlesim chapt4_interfaces)
+add_executable(dynamic_tf_broadcaster src/dynamic_tf_broadcaster.cpp)
+ament_target_dependencies(dynamic_tf_broadcaster rclcpp tf2 tf2_ros geometry_msgs tf2_geometry_msgs)
 
+add_executable(tf_listener src/tf_listener.cpp)
+ament_target_dependencies(tf_listener rclcpp tf2 tf2_ros geometry_msgs tf2_geometry_msgs)
 
-install(TARGETS
-  turtle_control
-  patrol_client
-  DESTINATION lib/${PROJECT_NAME}
-)
-# 将launch 目录复制到 install 目录中对应功能包的 share 目录下，这样在运行时才能找到对应文件
-install(DIRECTORY launch
-  DESTINATION share/${PROJECT_NAME}
-)
 
 
 if(BUILD_TESTING)
@@ -41,5 +35,13 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+install(TARGETS
+  tf_listener
+  static_tf_broadcaster
+  dynamic_tf_broadcaster
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 
 ament_package()
