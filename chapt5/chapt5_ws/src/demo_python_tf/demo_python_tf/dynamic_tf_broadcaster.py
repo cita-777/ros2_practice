@@ -9,7 +9,7 @@ class DynamicTFBroadcaster(Node):
     def __init__(self):
         super().__init__("tf_node")
         self.tf_broadcaster_ = TransformBroadcaster(self)
-        # 动态TF需要持续发布，这里发布频率设置为 100HZ
+        # 动态TF需要持续发布才有效！这里发布频率设置为 100HZ
         self.timer_ = self.create_timer(0.01, self.publish_transform)
 
     def publish_transform(self):
@@ -25,6 +25,8 @@ class DynamicTFBroadcaster(Node):
         transform.transform.rotation.y = rotation_quat[1]
         transform.transform.rotation.z = rotation_quat[2]
         transform.transform.rotation.w = rotation_quat[3]
+        # 输出相比静态多了时间戳信息
+        self.get_logger().warn(f"Publishing TF: {transform}")
         self.tf_broadcaster_.sendTransform(transform)
 
 

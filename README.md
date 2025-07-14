@@ -1,12 +1,12 @@
 ## **ROS2_Learning**
 
-### chapt2: 
+### chapt2: 基础
 
 - 单结点、WorkSpace、功能包
 - cpp:共享指针、lambda、Auto
 - cpp & py:多线程、Http
 
-### chapt3:
+### chapt3:话题与结点
 
 #### topic_ws
 
@@ -20,7 +20,7 @@
 - py:导入前面定义的SystemStatus，使用定时器1Hz回调进行状态更新，绑定至msg后Publish为sys_status(名称)topic
 - cpp:rqt订阅sys_status topic，topic更新即回调函数，转化为qt gui，双线程分别处理qt的exec和node的spin两个阻塞函数；非ros组件正常使用CMake的target_link_libraries语句链接即可，ament_cmake是cmake的超集，向下兼容
 
-### chapt4:
+### chapt4:服务
 - service(服务)与param(参数)与launch(启动文件)
 - param基于service实现，本质是同源的，service是基于Request和Response的双向通讯机制，这是和前面基于发布-订阅制的单向通讯的topic的区分点
 - topic自定义.msg消息接口，而service自定义.srv服务接口
@@ -33,4 +33,10 @@
 - 各个node间参数的声明、设置、订阅比较简单，略
 - launch:支持python、xml、yaml，采用python写，格式类似setup.py；需要注意的是：将 launch 目录复制到 install 目录中对应功能包的 share 目录下,ROS2才能找到它；cpp修改cmake实现，py修改setup实现即可；launch支持传递参数等高阶功能
 
-### chapt5:
+### chapt5:提供的实用工具
+- tf(坐标变换)、rqt可视化、rviz可视化与bag(捕获)
+- py:tf本质是话题实现的广播；导入tf_ros用于发布广播，geometry_msgs提供发布坐标变换所需的消息接口，tf_transformations提供姿态转换相关函数[SO(3)的的旋转矩阵、欧拉角、四元数转换等]；先创建StaticTransformBroadcaster对象，再创建消息接口TransformStamped对象给其赋值，最后Sendransform发布静态坐标变换，动态同理，只不过加了定时器100Hz发布动态tf；监听部分，导入TransformListener类订阅TF数据，Buffer类存储TF数据帧；将Bufeer传递给TransformListener监听；用1Hz定时器调用lookup_transform查询TF变换。
+- cpp:实现功能和py基本一致，例子换成地图坐标系变换而非py的手眼标定
+- rqt:查看TF Tree等功能
+- rviz:可视化TF坐标之间的关系，比rqt更直接了
+- bag:捕获/turtle1/cmd_vel话题进行录制，保存到本地后可以回放，慢放、暂停等操作，从而实现复现与分析

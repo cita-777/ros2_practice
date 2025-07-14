@@ -13,26 +13,38 @@ class DynamicTFBroadcaster : public rclcpp::Node
 public:
   DynamicTFBroadcaster() : Node("dynamic_tf_broadcaster")
   {
+    // 创建一个 TransformBroadcaster 对象，用于发布坐标变换
     tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
+    // 创建一个定时器，每10毫秒调用一次 publishTransform 方法
     timer_ = create_wall_timer(10ms, std::bind(&DynamicTFBroadcaster::publishTransform, this));
   }
 
   void publishTransform()
   {
+    // 创建一个 TransformStamped 消息对象
     geometry_msgs::msg::TransformStamped transform;
+    // 设置消息的各个字段
     transform.header.stamp = this->get_clock()->now();
     transform.header.frame_id = "map";
     transform.child_frame_id = "base_link";
+    // 设置变换的平移和旋转部分
     transform.transform.translation.x = 2.0;
     transform.transform.translation.y = 3.0;
     transform.transform.translation.z = 0.0;
+    // 使用 tf2::Quaternion 类来设置旋转部分
+    // 这里使用欧拉角 (roll, pitch, yaw) 的方式设置旋转
+    // 通过 tf2::toMsg 函数将 tf2::Quaternion 转换为消息接口类型
+    // 这样可以直接将四元数转换为 geometry_msgs::msg::Quaternion 类型
     tf2::Quaternion quat;
+    //RPY（roll, pitch, yaw）
     quat.setRPY(0, 0, 30 * M_PI / 180);              // 弧度制欧拉角转四元数
     transform.transform.rotation = tf2::toMsg(quat); // 转成消息接口类型
     tf_broadcaster_->sendTransform(transform);
   }
 
 private:
+  // 成员变量：TransformBroadcaster 和定时器
+  // TransformBroadcaster 类用于发布坐标变换
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
   rclcpp::TimerBase::SharedPtr timer_;
 };
