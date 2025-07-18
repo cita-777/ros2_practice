@@ -7,6 +7,7 @@
 该巡检机器人要能够在不同的目标点之间进行循环移动，每到达一个目标点后首先通过语音播放到达的目标点信息，接着通过摄像头采集一张实时的图像并保存到本地。
 
 各功能包功能如下：
+
 - fishbot_description 机器人描述文件，包含仿真相关配置
 - fishbot_navigation2 机器人导航配置文件
 - fishbot_application 机器人导航应用 Python 代码
@@ -77,7 +78,3 @@ ros2 launch fishbot_navigation2 navigation2.launch.py
 source install/setup.bash
 ros2 launch autopatrol_robot autopatrol.launch.py
 ```
-
-## 3.作者
-
-- [fishros](https://github.com/fishros)
