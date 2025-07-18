@@ -1,5 +1,6 @@
 import rclpy
 from geometry_msgs.msg import PoseStamped, Pose
+# BasicNavigator类用于导航相关操作
 from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
 from tf2_ros import TransformListener, Buffer
 from tf_transformations import euler_from_quaternion, quaternion_from_euler
@@ -71,6 +72,7 @@ class PatrolNode(BasicNavigator):
         """
         通过 x,y,yaw 合成 PoseStamped
         """
+        # 创建 PoseStamped 消息
         pose = PoseStamped()
         pose.header.frame_id = 'map'
         pose.pose.position.x = x
@@ -87,6 +89,7 @@ class PatrolNode(BasicNavigator):
         初始化机器人位姿
         """
         # 从参数获取初始化点
+        # 这是前面定义的参数值
         self.initial_point_ = self.get_parameter('initial_point').value
         # 合成位姿并进行初始化
         self.setInitialPose(self.get_pose_by_xyyaw(
@@ -100,6 +103,7 @@ class PatrolNode(BasicNavigator):
         """
         points = []
         self.target_points_ = self.get_parameter('target_points').value
+        #可以用多组目标点
         for index in range(int(len(self.target_points_)/3)):
             x = self.target_points_[index*3]
             y = self.target_points_[index*3+1]

@@ -20,7 +20,7 @@ def main():
     navigator.goToPose(goal_pose)
     while not navigator.isTaskComplete():
         feedback = navigator.getFeedback()
-        navigator.get_logger().info(
+        navigator.get_logger().warn(
             f'预计: {Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9} s 后到达')
         # 超时自动取消
         if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
