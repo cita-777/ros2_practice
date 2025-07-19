@@ -1,0 +1,1 @@
+/home/cita/ros2_practice/hesai_lidar_ws/build/hesai_ros_driver/rosidl_generator_c/hesai_ros_driver/msg/detail/loss_packet__type_support.h

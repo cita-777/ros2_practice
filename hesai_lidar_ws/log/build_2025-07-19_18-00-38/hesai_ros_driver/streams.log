@@ -1,0 +1,69 @@
+[0.007s] Invoking command in '/home/cita/ros2_practice/hesai_lidar_ws/build/hesai_ros_driver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/cita/ros2_practice/hesai_lidar_ws -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/cita/ros2_practice/hesai_lidar_ws/install/hesai_ros_driver
+[0.053s] -- The C compiler identification is GNU 11.4.0
+[0.086s] -- The CXX compiler identification is GNU 11.4.0
+[0.090s] -- Detecting C compiler ABI info
+[0.137s] -- Detecting C compiler ABI info - done
+[0.140s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.140s] -- Detecting C compile features
+[0.141s] -- Detecting C compile features - done
+[0.142s] -- Detecting CXX compiler ABI info
+[0.193s] -- Detecting CXX compiler ABI info - done
+[0.197s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.197s] -- Detecting CXX compile features
+[0.197s] -- Detecting CXX compile features - done
+[0.197s] -- cuda not found!
+[0.198s] [0m=============================================================[0m
+[0.198s] [0m-- ROS_VERSION is 2[0m
+[0.198s] [0m=============================================================[0m
+[0.292s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.328s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.360s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.362s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.366s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.372s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.379s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.396s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.397s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.450s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.469s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.493s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.498s] -- Looking for pthread.h
+[0.548s] -- Looking for pthread.h - found
+[0.549s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.598s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.599s] -- Found Threads: TRUE  
+[0.620s] [0m=============================================================[0m
+[0.620s] [0m-- ROS2 Found. ROS2 Support is turned On.[0m
+[0.620s] [0m=============================================================[0m
+[0.620s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.633s] -- Found rclcpp_action: 16.0.12 (/opt/ros/humble/share/rclcpp_action/cmake)
+[0.648s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.820s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[1.041s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.121s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.138s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[1.139s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[1.158s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[1.158s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.158s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.158s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.173s] -- Found PythonExtra: .so  
+[1.202s] [31mCMake Error at CMakeLists.txt:166 (add_subdirectory):
+[1.202s]   The source directory
+[1.202s] 
+[1.202s]     /home/cita/ros2_practice/hesai_lidar_ws/src/driver/HesaiLidar_SDK_2.0
+[1.203s] 
+[1.203s]   does not contain a CMakeLists.txt file.
+[1.203s] 
+[1.203s] [0m
+[1.208s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread 
+[1.209s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/symlink_install/ament_cmake_symlink_install_targets.cmake:67 (message):
+[1.209s]   ament_cmake_symlink_install_targets() 'hesai_sdk_lib' is not a target
+[1.209s] Call Stack (most recent call first):
+[1.209s]   /opt/ros/humble/share/ament_cmake_core/cmake/symlink_install/install.cmake:37 (ament_cmake_symlink_install_targets)
+[1.209s]   CMakeLists.txt:246 (install)
+[1.209s] 
+[1.209s] [0m
+[1.209s] -- Configuring incomplete, errors occurred!
+[1.209s] See also "/home/cita/ros2_practice/hesai_lidar_ws/build/hesai_ros_driver/CMakeFiles/CMakeOutput.log".
+[1.221s] Invoked command in '/home/cita/ros2_practice/hesai_lidar_ws/build/hesai_ros_driver' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/cita/ros2_practice/hesai_lidar_ws -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/cita/ros2_practice/hesai_lidar_ws/install/hesai_ros_driver

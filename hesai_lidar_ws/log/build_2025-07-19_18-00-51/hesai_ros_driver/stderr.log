@@ -1,0 +1,21 @@
+[0m=============================================================[0m
+[0m-- ROS_VERSION is 2[0m
+[0m=============================================================[0m
+[0m=============================================================[0m
+[0m-- ROS2 Found. ROS2 Support is turned On.[0m
+[0m=============================================================[0m
+[31mCMake Error at CMakeLists.txt:166 (add_subdirectory):
+  The source directory
+
+    /home/cita/ros2_practice/hesai_lidar_ws/src/driver/HesaiLidar_SDK_2.0
+
+  does not contain a CMakeLists.txt file.
+
+[0m
+[31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/symlink_install/ament_cmake_symlink_install_targets.cmake:67 (message):
+  ament_cmake_symlink_install_targets() 'hesai_sdk_lib' is not a target
+Call Stack (most recent call first):
+  /opt/ros/humble/share/ament_cmake_core/cmake/symlink_install/install.cmake:37 (ament_cmake_symlink_install_targets)
+  CMakeLists.txt:246 (install)
+
+[0m

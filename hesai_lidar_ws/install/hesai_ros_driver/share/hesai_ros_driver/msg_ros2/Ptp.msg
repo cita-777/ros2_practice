@@ -1,0 +1,1 @@
+/home/cita/ros2_practice/hesai_lidar_ws/msg/msg_ros2/Ptp.msg
